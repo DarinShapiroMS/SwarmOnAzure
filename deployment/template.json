@@ -1,0 +1,153 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "vmssName": {
+            "type": "string"
+        },
+        "vmSku": {
+            "type": "string"
+        },
+        "adminUsername": {
+            "type": "string"
+        },
+        "instanceCount": {
+            "type": "string"
+        },
+        "image": {
+            "type": "object"
+        },
+        "singlePlacementGroup": {
+            "type": "string"
+        },
+        "pipName": {
+            "type": "string"
+        },
+        "pipLabel": {
+            "type": "string"
+        },
+        "skuType": {
+            "type": "string"
+        },
+        "ipAllocationMethod": {
+            "type": "string"
+        },
+        "priority": {
+            "type": "string"
+        },
+        "subnetId": {
+            "type": "string"
+        },
+        "enableAcceleratedNetworking": {
+            "type": "string"
+        },
+        "publicIpAddressPerInstance": {
+            "type": "string"
+        },
+        "upgradeMode": {
+            "type": "string"
+        },
+        "adminPassword": {
+            "type": "securestring"
+        },
+        "vnetName": {
+            "type": "string"
+        },
+        "subnetResourceGroup": {
+            "type": "string"
+        },
+        "configScriptUrl" : {
+            "type": "string"
+        },
+        "coordinatorIp" :{
+            "type": "string"
+        }
+    },
+    "variables": {
+        "namingInfix": "[toLower(substring(concat(parameters('vmssName'), uniqueString(resourceGroup().id)), 0, 9))]",
+        "networkApiVersion": "2018-01-01",
+        "storageApiVersion": "2018-07-01",
+        "computeApiVersion": "2018-06-01",
+        "autoscaleApiVersion": "2015-04-01"
+    },
+    "resources": [
+        {
+            "name": "[parameters('vmssName')]",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "apiVersion": "[variables('computeApiVersion')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "sku": {
+                "name": "[parameters('vmSku')]",
+                "tier": "Standard",
+                "capacity": "[int(parameters('instanceCount'))]"
+            },
+            "properties": {
+                "overprovision": "true",
+                "upgradePolicy": {
+                    "mode": "[parameters('upgradeMode')]"
+                },
+                "singlePlacementGroup": "[parameters('singlePlacementGroup')]",
+                "virtualMachineProfile": {
+                    "storageProfile": {
+                        "imageReference": "[parameters('image')]",
+                        "osDisk": {
+                            "createOption": "FromImage",
+                            "caching": "ReadWrite"
+                        }
+                    },
+                    "priority": "[parameters('priority')]",
+                    "osProfile": {
+                        "computerNamePrefix": "[variables('namingInfix')]",
+                        "adminUsername": "[parameters('adminUsername')]",
+                        "adminPassword": "[parameters('adminPassword')]"
+                    },
+                    "networkProfile": {
+                        "networkInterfaceConfigurations": [
+                            {
+                                "name": "[concat(parameters('vmssName'), 'Nic')]",
+                                "properties": {
+                                    "primary": "true",
+                                    "enableAcceleratedNetworking": "[parameters('enableAcceleratedNetworking')]",
+                                    "ipConfigurations": [
+                                        {
+                                            "name": "[concat(parameters('vmssName'), 'IpConfig')]",
+                                            "properties": {
+                                                "subnet": {
+                                                    "id": "[parameters('subnetId')]"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "extensionProfile": {
+                        "extensions": [
+                            {
+                                "properties": {
+                                    "autoUpgradeMinorVersion": true,
+                                    "settings": {
+                                        "fileUris": [
+                                            "[parameters('configScriptUrl')]"
+                                        ],
+                                        "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ConfigVM.ps1',' -user ', parameters('adminUsername'), ' -pwd ', parameters('adminPassword'), ' -coordinatorIp ', parameters('coordinatorIp'))]"
+                                    },
+                                    "publisher": "Microsoft.Compute",
+                                    "type": "CustomScriptExtension",
+                                    "typeHandlerVersion": "1.7"
+                                },
+                                "name": "CustomScriptExtension"
+                            }
+                        ]
+                    }
+
+                }
+            }
+        }
+    ]
+}
