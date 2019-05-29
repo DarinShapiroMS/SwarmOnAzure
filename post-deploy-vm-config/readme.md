@@ -1,1 +1,5 @@
-Description of Custom Script Extension and powershell script goes here
+# **Post Deployment Configuration of Virtual Machines**
+
+The script in this folder is referenced by the arm template (template.json) in the deployment folder. By default, when the template deploy script is run, the ConfigVM.ps1 script is linked to it's raw URL here on Github.  If you would like more control of this file, you can upload it to Azure stores to ensure no changes to this repo affect your deployments. You then just need to update the reference in the template.json file to reflect the new url. 
+
+When a VM is created by the vmss, the referenced file (ConfigVM.ps1) is downloaded to the local VM and executed post provisioning to run one time.  In order for this script to execute properly, it needs to download a zip file containing the Unreal Swarm Agent folder with all subfolders. You should store this zip file in Azure Storage and update the script with the URL needed to download the zip at runtime. 
