@@ -1,6 +1,9 @@
 # **Swarm On Azure**
 
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://azuredeploy.net/)
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fdarinshapiroms%2swarmonazure%2Fmaster%2Fazuredeploy.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
 
 This repo contains a set of scripts, templates, and an exe that will deploy a cluster of Unreal Swarm Agents using Azure Virtual Machine Scale Sets. Along with network connectivity via EspressRoute or Virtual Network Gateway, the instances that are spun up connect to an Unreal Swarm Coordinator to manage the tasks they will execute. A brief desription of the components of this solution, organized into folders in this repo, are below.
 
