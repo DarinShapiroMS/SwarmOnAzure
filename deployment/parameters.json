@@ -30,7 +30,7 @@
             "value": "Swarm"
         },
         "configScriptUrl" :{
-            "value": "https://swarmdiag.blob.core.windows.net/vm-config-files/ConfigVM.ps1"
+            "value": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/post-deploy-vm-config/ConfigVM.ps1"
         },
         "coordinatorIp" : {
             "value": "5.5.5.5"
