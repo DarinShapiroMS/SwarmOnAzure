@@ -24,7 +24,7 @@
             "value": "SwarmVnet"
         },
         "subnetId": {
-            "value": "/subscriptions/3af88148-8e0f-4788-804d-a2367b181169/resourceGroups/Swarm/providers/Microsoft.Network/virtualNetworks/SwarmVnet/subnets/SwarmVnet"
+            "value": "/subscriptions/YourSubscriptionId/resourceGroups/Swarm/providers/Microsoft.Network/virtualNetworks/SwarmVnet/subnets/SwarmVnet"
         },
         "subnetResourceGroup": {
             "value": "Swarm"
