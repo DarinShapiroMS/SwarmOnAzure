@@ -1,7 +1,7 @@
 # PowerShell Deployment Scripts
 Once executed, a Virtual Machine Scale Set is created in your Azure subscription based upon parameter settings, and the vmss creates and manages the instances of the virtual machines. An important security aspect of this solution is that these instances are deployed into a private virtual network with no public IP or accessibility.  They can only communicate with the Swarm Coordinator over a VPN or Express route connection to your local network.
 
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://azuredeploy.net/)
+
 
 The three required files
 * Deploy.ps1
