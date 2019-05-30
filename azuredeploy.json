@@ -43,16 +43,22 @@
             "type": "string",
             "defaultValue": "/subscriptions/{YourSubscriptionId}/resourceGroups/{Swarm}/providers/Microsoft.Network/virtualNetworks/{SwarmVnet}/subnets/{VNetSubnetName}",
             "metadata": {
-                "description":"Replace the existing values in curly braces with your own sub id, resource group, vnet, subnet."
+                "description":"The vnet/subnet for vm instances. Need to be reachable via VPN. Replace the existing values in curly braces with your own sub id, resource group, vnet, subnet."
             }
 
         },                          
         "configScriptUrl" : {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/post-deploy-vm-config/ConfigVM.ps1"
+            "defaultValue": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/post-deploy-vm-config/ConfigVM.ps1",
+            "metadata": {
+                "description":"The URL to the vm configuration script that runs when a new vm is provisioned."
+            }
         },
         "coordinatorIp" :{
-            "type": "string"             
+            "type": "string",
+            "metadata": {
+                "description":"The IP address of the Swarm Coordinator, typically on your local on-prem network.  Must be reachable by vms in Azure via VPN."
+            }             
         }
     },
     "variables": {
