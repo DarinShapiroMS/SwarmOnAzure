@@ -11,7 +11,7 @@
         },
         "vmSku": {
             "type": "string",
-            "defaultValue": "reference size column at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes",
+            "defaultValue": "Example: Standard_F4s_v2, reference size column at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes",
             "metadata": {
                 "description":"The sku/size of the vm instances to be created.  Determines cores/memory/etc."
             }
@@ -49,7 +49,7 @@
         },                          
         "configScriptUrl" : {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/post-deploy-vm-config/ConfigVM.ps1",
+            "defaultValue": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/ConfigVM.ps1",
             "metadata": {
                 "description":"The URL to the vm configuration script that runs when a new vm is provisioned."
             }

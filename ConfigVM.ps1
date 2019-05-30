@@ -9,7 +9,7 @@ Add-Type -AssemblyName System.Xml.Linq
 
  # ALL THIS HAS TO BE IDEMPOTENT
 
-# 1. get the zip file with all the swarm binaries & unzip to proper location
+# 1. get the zip file withthe swarm binaries and bootstrapper, then unzip to proper location
     $swarmrootdirectory = 'c:\swarm'
     $swarmurl = 'https://swarmdiag.blob.core.windows.net/vm-config-files/SwarmAgent.zip'
     $tempzipfile = "$swarmrootdirectory\SwarmBinaries.zip"
@@ -34,9 +34,10 @@ Add-Type -AssemblyName System.Xml.Linq
     $element.SetElementValue("CoordinatorRemotingHost", $coordinatorIp)
     $element.Save("$swarmrootdirectory\Swarm Agent\SwarmAgent.Options.xml")
 
+#2a add firewall rules to allow port 8008, 8009, & ICMP
 
 
-# 3 .add scheduled task at startup or login to run
+# 3 .add startup shortcut for any login to start the bootstrapper
     $ItemPath = "$swarmrootdirectory\Swarm Agent\swarmagent.exe"
     $Destination =  "$env:ALLUSERSPROFILE\Microsoft\Windows\Start Menu\Programs\StartUp\Swarm.lnk"
     if(![System.IO.Directory]::Exists($Destination)){
