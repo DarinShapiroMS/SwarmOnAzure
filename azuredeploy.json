@@ -1,10 +1,7 @@
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "location": {
-            "type": "string"
-        },
+    "parameters": {       
         "vmssName": {
             "type": "string",       
             "defaultValue": "SwarmAgents",
@@ -25,6 +22,7 @@
                 "description": "The admin username for the Windows virtual machine. Store this info for later use such as RDP into vm."
             },
             "defaultValue": "swarmadmin"
+            
         },
         "adminPassword": {
             "type": "securestring",
@@ -48,38 +46,13 @@
                 "version": "latest",
                 "offer": "WindowsServer"
             }
-        },
-        "singlePlacementGroup": {
-            "type": "string"
-        },
-        "pipName": {
-            "type": "string"
-        },
-        "pipLabel": {
-            "type": "string"
-        },
+        },        
         "skuType": {
             "type": "string"
-        },
-        "ipAllocationMethod": {
-            "type": "string"
-        },
-        "priority": {
-            "type": "string"
-        },
+        },         
         "subnetId": {
             "type": "string"
-        },
-        "enableAcceleratedNetworking": {
-            "type": "string"
-        },
-        "publicIpAddressPerInstance": {
-            "type": "string"
-        },
-        "upgradeMode": {
-            "type": "string"
-        },
-     
+        },                      
         "vnetName": {
             "type": "string"
         },
@@ -106,7 +79,7 @@
             "name": "[parameters('vmssName')]",
             "type": "Microsoft.Compute/virtualMachineScaleSets",
             "apiVersion": "[variables('computeApiVersion')]",
-            "location": "[parameters('location')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [],
             "sku": {
                 "name": "[parameters('vmSku')]",
@@ -116,9 +89,9 @@
             "properties": {
                 "overprovision": "true",
                 "upgradePolicy": {
-                    "mode": "[parameters('upgradeMode')]"
+                    "mode": "Automatic"
                 },
-                "singlePlacementGroup": "[parameters('singlePlacementGroup')]",
+                "singlePlacementGroup": "false",
                 "virtualMachineProfile": {
                     "storageProfile": {
                         "imageReference": "[parameters('image')]",
@@ -127,7 +100,7 @@
                             "caching": "ReadWrite"
                         }
                     },
-                    "priority": "[parameters('priority')]",
+                    "priority": "Regular",
                     "osProfile": {
                         "computerNamePrefix": "[variables('namingInfix')]",
                         "adminUsername": "[parameters('adminUsername')]",
@@ -139,7 +112,7 @@
                                 "name": "[concat(parameters('vmssName'), 'Nic')]",
                                 "properties": {
                                     "primary": "true",
-                                    "enableAcceleratedNetworking": "[parameters('enableAcceleratedNetworking')]",
+                                    "enableAcceleratedNetworking": "false",
                                     "ipConfigurations": [
                                         {
                                             "name": "[concat(parameters('vmssName'), 'IpConfig')]",
