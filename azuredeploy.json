@@ -38,27 +38,15 @@
                 "description": "The inital number of vm instances to create.  This nunmber can be adjusted later or even automated."
             }
         },
-        "image": {
-            "type": "object",
-            "defaultValue":  {
-                "sku": "2016-Datacenter",
-                "publisher": "MicrosoftWindowsServer",
-                "version": "latest",
-                "offer": "WindowsServer"
-            }
-        },        
-        "skuType": {
-            "type": "string"
-        },         
+               
         "subnetId": {
-            "type": "string"
-        },                      
-        "vnetName": {
-            "type": "string"
-        },
-        "subnetResourceGroup": {
-            "type": "string"
-        },
+            "type": "string",
+            "defaultValue": "/subscriptions/{YourSubscriptionId}/resourceGroups/{Swarm}/providers/Microsoft.Network/virtualNetworks/{SwarmVnet}/subnets/{VNetSubnetName}",
+            "metadata": {
+                "description":"Replace the existing values in curly braces with your own sub id, resource group, vnet, subnet."
+            }
+
+        },                          
         "configScriptUrl" : {
             "type": "string",
             "defaultValue": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/post-deploy-vm-config/ConfigVM.ps1"
@@ -72,7 +60,13 @@
         "networkApiVersion": "2018-01-01",
         "storageApiVersion": "2018-07-01",
         "computeApiVersion": "2018-06-01",
-        "autoscaleApiVersion": "2015-04-01"
+        "autoscaleApiVersion": "2015-04-01",
+        "image":{
+            "sku": "2016-Datacenter",
+            "publisher": "MicrosoftWindowsServer",
+            "version": "latest",
+            "offer": "WindowsServer"
+        }
     },
     "resources": [
         {
@@ -94,7 +88,7 @@
                 "singlePlacementGroup": "false",
                 "virtualMachineProfile": {
                     "storageProfile": {
-                        "imageReference": "[parameters('image')]",
+                        "imageReference": "[variables('image')]",
                         "osDisk": {
                             "createOption": "FromImage",
                             "caching": "ReadWrite"
