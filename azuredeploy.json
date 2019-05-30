@@ -7,9 +7,9 @@
         },
         "vmssName": {
             "type": "string",       
-            "defaultValue": "master",
+            "defaultValue": "SwarmAgents",
             "metadata": {
-                    "description": "Sourcecode Repo branch. This should be set to Master for the public sample. You can adjust this to point to your own fork branch as recommended"
+                    "description": "The name of the Scale Set. Other names will be derived from this value.\r\n The value must be between 1 and 15 characters long. The value can only contain alphanumeric characters and cannot start with a number. Azure resource names cannot contain special characters \/""[]:|<>+=;,?*@& or begin with '_' or end with '.' or '-'"
                     }
         },
         "vmSku": {
