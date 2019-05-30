@@ -6,7 +6,11 @@
             "type": "string"
         },
         "vmssName": {
-            "type": "string"
+            "type": "string",       
+            "defaultValue": "master",
+            "metadata": {
+                    "description": "Sourcecode Repo branch. This should be set to Master for the public sample. You can adjust this to point to your own fork branch as recommended"
+                    }
         },
         "vmSku": {
             "type": "string"
