@@ -9,7 +9,7 @@
             "type": "string",       
             "defaultValue": "SwarmAgents",
             "metadata": {
-                    "description": "The name of the Scale Set. The value must be between 1 and 15 alpha numeric characters long. The value can only contain alphanumeric characters and cannot start with a number or contain special characters"
+                    "description": "The name of the Scale Set. The value must be between 1 and 15 alpha numeric characters long,  only contain alphanumeric characters, not start with a number, or contain special characters"
                     }
         },
         "vmSku": {
