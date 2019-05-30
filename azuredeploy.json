@@ -9,20 +9,45 @@
             "type": "string",       
             "defaultValue": "SwarmAgents",
             "metadata": {
-                    "description": "The name of the Scale Set. The value must be between 1 and 15 alpha numeric characters long,  only contain alphanumeric characters, not start with a number, or contain special characters"
+                    "description": "The name of the Scale Set. The value must be between 1 and 15 alpha numeric characters long,  only contain alphanumeric characters, not start with a number, or contain special characters."
                     }
         },
         "vmSku": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "reference size column at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes",
+            "metadata": {
+                "description":"The sku/size of the vm instances to be created.  Determines cores/memory/etc."
+            }
         },
         "adminUsername": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "The admin username for the Windows virtual machine. Store this info for later use such as RDP into vm."
+            },
+            "defaultValue": "swarmadmin"
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description":"Password for Windows admin user.  Store this info for later use such as RDP into vm."
+            }
+            
         },
         "instanceCount": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "5",
+            "metadata": {
+                "description": "The inital number of vm instances to create.  This nunmber can be adjusted later or even automated."
+            }
         },
         "image": {
-            "type": "object"
+            "type": "object",
+            "defaultValue":  {
+                "sku": "2016-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
+                "offer": "WindowsServer"
+            }
         },
         "singlePlacementGroup": {
             "type": "string"
@@ -54,9 +79,7 @@
         "upgradeMode": {
             "type": "string"
         },
-        "adminPassword": {
-            "type": "securestring"
-        },
+     
         "vnetName": {
             "type": "string"
         },
@@ -64,10 +87,11 @@
             "type": "string"
         },
         "configScriptUrl" : {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/post-deploy-vm-config/ConfigVM.ps1"
         },
         "coordinatorIp" :{
-            "type": "string"
+            "type": "string"             
         }
     },
     "variables": {
