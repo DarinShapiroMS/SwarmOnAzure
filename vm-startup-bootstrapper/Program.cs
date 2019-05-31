@@ -18,6 +18,7 @@ namespace SwarmAgentBootstrapperNet
             // to equal those of the host VM.  After setting that value
             // in the config file, it starts the Swarm Agent. 
 
+            // TODO: decide how to do logging to give visibility into failures
 
             // Get the number of logical processors
             int vCPU_Count = Environment.ProcessorCount;
