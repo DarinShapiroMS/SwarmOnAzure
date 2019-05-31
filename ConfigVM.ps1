@@ -24,7 +24,7 @@ Add-Type -AssemblyName System.Xml.Linq
     Remove-Item -Path $tempzipfile
 
 #2  Download swarm bootstrapper exe (shortcut to this placed in startup folder to auto run on auto login)
-    $bootstrapperurl = 'https://swarmdiag.blob.core.windows.net/vm-config-files/swarmbootstrapper.exe'    
+    $bootstrapperurl = 'https://swarmdiag.blob.core.windows.net/vm-config-files/SwarmBootstrapper.exe'    
     (New-Object Net.WebClient).DownloadFile($bootstrapperurl,$swarmbootstrapperexe);
 
 #3. add coordinator IP, processor count is done by bootstrapper now   
@@ -42,6 +42,7 @@ Add-Type -AssemblyName System.Xml.Linq
         $WshShell = New-Object -comObject WScript.Shell
         $Shortcut = $WshShell.CreateShortcut($Destination)
         $Shortcut.TargetPath = $swarmbootstrapperexe
+        $shortcut.Workingdirectory = "$swarmrootdirectory\Swarm Agent\"
         $Shortcut.Save()
     }
 
