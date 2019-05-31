@@ -34,7 +34,14 @@ Add-Type -AssemblyName System.Xml.Linq
     $element.Save("$swarmrootdirectory\Swarm Agent\SwarmAgent.Options.xml")
 
 #4 add firewall rules to allow port 8008, 8009, & ICMP
-
+    $rule8008 = Get-NetFirewallRule -DisplayName "SwarmInbound8008"
+    $rule8009 = Get-NetFirewallRule -DisplayName "SwarmInbound8009"
+    if($null -eq $rule8008){
+        new-netfirewallrule -displayname "SwarmInbound8008" -direction inbound -action allow -protocol tcp -LocalPort 8008
+    }
+    if($null -eq $rule8009){
+        new-netfirewallrule -displayname "SwarmInbound8009" -direction inbound -action allow -protocol tcp -LocalPort 8009
+    }
 
 #5 .add startup shortcut for any login to start the bootstrapper
     $Destination =  "$env:ALLUSERSPROFILE\Microsoft\Windows\Start Menu\Programs\StartUp\Swarm.lnk"
