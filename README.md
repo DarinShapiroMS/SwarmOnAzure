@@ -5,11 +5,11 @@
 
 
 
-This repo contains a PowerShell script, an ARM template, and an exe that will deploy a cluster of Unreal Swarm Agents into your Azure subscription using Azure Virtual Machine Scale Sets. 
+This repo contains a PowerShell script, an ARM template, and an exe that will deploy a cluster of Unreal Swarm Agents into your Azure subscription using [Azure Virtual Machine Scale Sets](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview). 
 
 Before deploying this solution, you should fork this Github repo since you may want to make changes specific to your environment.  
 
-There is also the prequisite step of setting up a Virtual Network and VPN gateway. This is because all communicatin between the Swarm Agents and your on-premise Swarm Coordinator happens over a private network. The Swarn Agents are deployed to VM instances that have no public IP address. 
+There is also the prequisite step of setting up a Virtual Network and [VPN gateway](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways). This is because all communicatin between the Swarm Agents and your on-premise Swarm Coordinator happens over a private network. The Swarn Agents are deployed to VM instances that have no public IP address. 
 
 **You'll need the following information to initiate the deployment**
 
@@ -42,4 +42,4 @@ The "Deploy To Azure" button above will submit the azuredeploy.json arm template
 
 
 ### **VM-Startup-Bootstrapper folder**
-This folder contains a simple C# command line app that runs each time the VM is restarted. The purpose is to keep the Swarm Agent configured to utilize all available cores, even if you re-size the instances within the scale set.  Otherwise you would have to RDP to the machines and update the Agent config to match the number of cores. **Note, updates to the master branch in this repo are continuously integrated and delivered via Azure DevOps Pipelines. Accepted pull requests will be live for new deployments within a few minutes of merging the pull request. [See More](vm-startup-bootstrapper/readme.md)
+This folder contains a simple C# command line app that runs each time the VM is restarted. The purpose is to keep the Swarm Agent configured to utilize all available cores, even if you re-size the instances within the scale set.  Otherwise you would have to RDP to the machines and update the Agent config to match the number of cores. **Note, updates to the master branch in this repo are continuously integrated and delivered via [Azure DevOps Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/). Accepted pull requests will be live for new deployments within a few minutes of merging the pull request. [See More](vm-startup-bootstrapper/readme.md)
