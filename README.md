@@ -7,7 +7,16 @@
 
 conflict
 
-This repo contains a PowerShell script, an ARM template, and an exe that will deploy a cluster of Unreal Swarm Agents using Azure Virtual Machine Scale Sets. Requiring private network connectivity via EspressRoute or Virtual Network Gateway, the instances that are spun up connect to an Unreal Swarm Coordinator to manage the tasks they will execute. 
+This repo contains a PowerShell script, an ARM template, and an exe that will deploy a cluster of Unreal Swarm Agents into your Azure subscription using Azure Virtual Machine Scale Sets. 
+
+Before deploying this solution, you should have already created a Virtual Network and subnets to support a VPN Gateway. You will need the following prior to deployment. 
+
+**Parameter** | **Description**
+---|---
+Resource Group | The resource group this cluster of Unreal Swarm agents will be deployed into
+Location | The Azure region for this resource group
+Vmss Name | The name of the Virtual Machines Scale Sets that will manage the cluster of VM instances
+
 
 ### **Overview**
 
