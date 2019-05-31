@@ -42,4 +42,4 @@ The "Deploy To Azure" button above will submit the azuredeploy.json arm template
 
 
 ### **VM-Startup-Bootstrapper folder**
-This folder contains a simple C# command line app that runs each time the VM is restarted. The purpose is to keep the Swarm Agent configured to utilize all available cores, even if you re-size the instances within the scale set.  Otherwise you would have to RDP to the machines and update the Agent config to match the number of cores. [See More](vm-startup-bootstrapper/readme.md)
+This folder contains a simple C# command line app that runs each time the VM is restarted. The purpose is to keep the Swarm Agent configured to utilize all available cores, even if you re-size the instances within the scale set.  Otherwise you would have to RDP to the machines and update the Agent config to match the number of cores. **Note, updates to the master branch in this repo are continuously integrated and delivered via Azure DevOps Pipelines. Accepted pull requests will be live for new deployments within a few minutes of merging the pull request. [See More](vm-startup-bootstrapper/readme.md)
