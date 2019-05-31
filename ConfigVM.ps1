@@ -22,13 +22,7 @@ Add-Type -AssemblyName System.Xml.Linq
     Remove-Item -Path $tempzipfile
 
 
-# 2. add logical processor count to config & coordinator IP so Swarm will use them all
-    # logical processor count
-    $logicalproccessorcount = [Environment]::ProcessorCount.ToString();
-    $element = [System.Xml.Linq.XElement]::Load("$swarmrootdirectory\Swarm Agent\SwarmAgent.DeveloperOptions.xml");
-    $element.SetElementValue("RemoteJobsDefaultProcessorCount", $logicalproccessorcount)
-    $element.Save("$swarmrootdirectory\Swarm Agent\SwarmAgent.DeveloperOptions.xml")
-    
+# 2. add coordinator IP, processor count is done by bootstrapper now   
     # coordinator IP
     $element = [System.Xml.Linq.XElement]::Load("$swarmrootdirectory\Swarm Agent\SwarmAgent.Options.xml");
     $element.SetElementValue("CoordinatorRemotingHost", $coordinatorIp)
