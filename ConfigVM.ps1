@@ -23,9 +23,14 @@ Add-Type -AssemblyName System.Xml.Linq
     (new-object -com shell.application).namespace($swarmrootdirectory).CopyHere((new-object -com shell.application).namespace($tempzipfile).Items(),16)
     Remove-Item -Path $tempzipfile
 
+    $swarmPrereqsUrl = "https://swarmdiag.blob.core.windows.net/vm-config-files/UE4PrereqSetup_x64.exe"
+    $tempzipfile = "$swarmrootdirectory\UE4PrereqSetup_x64.exe"
+    (New-Object Net.WebClient).DownloadFile($swarmPrereqsUrl,$tempzipfile);
+
 #2  Download swarm bootstrapper exe (shortcut to this placed in startup folder to auto run on auto login)
     $bootstrapperurl = 'https://swarmdiag.blob.core.windows.net/vm-config-files/SwarmBootstrapper.exe'    
     (New-Object Net.WebClient).DownloadFile($bootstrapperurl,$swarmbootstrapperexe);
+
 
 #3. add coordinator IP, processor count is done by bootstrapper now   
     # coordinator IP
@@ -34,14 +39,23 @@ Add-Type -AssemblyName System.Xml.Linq
     $element.Save("$swarmrootdirectory\Swarm Agent\SwarmAgent.Options.xml")
 
 #4 add firewall rules to allow port 8008, 8009, & ICMP
-    $rule8008 = Get-NetFirewallRule -DisplayName "SwarmInbound8008"
-    $rule8009 = Get-NetFirewallRule -DisplayName "SwarmInbound8009"
+    $rule8008 = Get-NetFirewallRule -DisplayName "SwarmInbound8008i"
+    $rule8009 = Get-NetFirewallRule -DisplayName "SwarmInbound8009i"
     if($null -eq $rule8008){
-        new-netfirewallrule -displayname "SwarmInbound8008" -direction inbound -action allow -protocol tcp -LocalPort 8008
+        new-netfirewallrule -displayname "SwarmInbound8008i" -direction inbound -action allow -protocol tcp -LocalPort 8008
+        new-netfirewallrule -displayname "SwarmInbound8008o" -direction Outbound -action allow -protocol tcp -LocalPort 8008
     }
     if($null -eq $rule8009){
-        new-netfirewallrule -displayname "SwarmInbound8009" -direction inbound -action allow -protocol tcp -LocalPort 8009
+        new-netfirewallrule -displayname "SwarmInbound8009i" -direction inbound -action allow -protocol tcp -LocalPort 8009
+        new-netfirewallrule -displayname "SwarmInbound8009o" -direction Outbound -action allow -protocol tcp -LocalPort 8009
     }
+    Set-NetFirewallRule -DisplayName “File and Printer Sharing (Echo Request - ICMPv4-In)” -enabled True
+
+#5 Install .net pre-reqs for unreal pre-reqa
+Dism /online /enable-feature /featurename:NetFx3 /All
+
+#6  Install Unreal Pre-reqs 
+c:\swarm\UE4PrereqSetup_x64.exe /install /quiet /norestart | Out-Null
 
 #5 .add startup shortcut for any login to start the bootstrapper
     $Destination =  "$env:ALLUSERSPROFILE\Microsoft\Windows\Start Menu\Programs\StartUp\Swarm.lnk"
