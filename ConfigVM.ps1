@@ -52,12 +52,12 @@ Add-Type -AssemblyName System.Xml.Linq
     Set-NetFirewallRule -DisplayName “File and Printer Sharing (Echo Request - ICMPv4-In)” -enabled True
 
 #5 Install .net pre-reqs for unreal pre-reqa
-Dism /online /enable-feature /featurename:NetFx3 /All
+    Dism /online /enable-feature /featurename:NetFx3 /All
 
 #6  Install Unreal Pre-reqs 
-c:\swarm\UE4PrereqSetup_x64.exe /install /quiet /norestart | Out-Null
+    c:\swarm\UE4PrereqSetup_x64.exe /install /quiet /norestart | Out-Null
 
-#5 .add startup shortcut for any login to start the bootstrapper
+#7 .add startup shortcut for any login to start the bootstrapper
     $Destination =  "$env:ALLUSERSPROFILE\Microsoft\Windows\Start Menu\Programs\StartUp\Swarm.lnk"
     if(![System.IO.Directory]::Exists($Destination)){
         $WshShell = New-Object -comObject WScript.Shell
@@ -67,15 +67,15 @@ c:\swarm\UE4PrereqSetup_x64.exe /install /quiet /norestart | Out-Null
         $Shortcut.Save()
     }
 
-#6 set auto run for admin user    
+#8 set auto run for admin user    
     $RegPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
     #setting registry values
     Set-ItemProperty $RegPath "AutoAdminLogon" -Value "1" -type String  
     Set-ItemProperty $RegPath "DefaultUsername" -Value "$user" -type String  
     Set-ItemProperty $RegPath "DefaultPassword" -Value "$pwd" -type String
 
-#7 All done, restart and auto login should take care of the rest. 
-Restart-Computer
+#9 All done, restart and auto login should take care of the rest. 
+    Restart-Computer
 
 
 
