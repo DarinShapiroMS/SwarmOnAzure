@@ -11,6 +11,8 @@ Add-Type -AssemblyName System.Xml.Linq
  $swarmrootdirectory = 'c:\swarm'
  $swarmbootstrapperexe = "$swarmrootdirectory\Swarm Agent\swarmbootstrapper.exe"
 
+Write-Output "Starting execution of vm configuration script."
+
 # 1. get the zip file withthe swarm binaries and bootstrapper, then unzip to proper location
     
     $swarmurl = 'https://swarmdiag.blob.core.windows.net/vm-config-files/SwarmAgent.zip'
@@ -74,6 +76,7 @@ Add-Type -AssemblyName System.Xml.Linq
     Set-ItemProperty $RegPath "DefaultUsername" -Value "$user" -type String  
     Set-ItemProperty $RegPath "DefaultPassword" -Value "$pwd" -type String
 
+Write-Output "Ending execution of vm config script and rebooting."
 #9 All done, restart and auto login should take care of the rest. 
     Restart-Computer
 
