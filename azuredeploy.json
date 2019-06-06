@@ -140,7 +140,8 @@
                                     "settings": {
                                         "fileUris": [
                                             "[parameters('configScriptUrl')]"
-                                        ]
+                                        ],
+                                            "commandToExecute": "[concat ('powershell -ExecutionPolicy Unrestricted -File ConfigVM.ps1',' -user ', parameters('adminUsername'), ' -pwd ', parameters('adminPassword'), ' -coordinatorIp ', parameters('coordinatorIp'))]"                                       
                                     },
                                     "publisher": "Microsoft.Compute",
                                     "type": "CustomScriptExtension",
