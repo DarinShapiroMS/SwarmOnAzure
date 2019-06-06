@@ -10,7 +10,7 @@
                     }
         },
         "vmSku": {
-            "type": "string",
+            "type": "string",          
             "defaultValue": "Example: Standard_F4s_v2, reference size column at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes",
             "metadata": {
                 "description":"The sku/size of the vm instances to be created.  Determines cores/memory/etc."
@@ -38,15 +38,19 @@
                 "description": "The inital number of vm instances to create.  This nunmber can be adjusted later or even automated."
             }
         },
-               
-        "subnetId": {
+        "vnetName":{
             "type": "string",
-            "defaultValue": "/subscriptions/{YourSubscriptionId}/resourceGroups/{Swarm}/providers/Microsoft.Network/virtualNetworks/{SwarmVnet}/subnets/{VNetSubnetName}",
+            "defaultValue": "",
             "metadata": {
-                "description":"The vnet/subnet for vm instances. Need to be reachable via VPN. Replace the existing values in curly braces with your own sub id, resource group, vnet, subnet."
+                "description":" The name of the Virtual Network the VMs will be deployed to."
             }
-
-        },                          
+        },
+        "subnetName":{
+            "type": "string",
+            "metadata": {
+                "description": "The name of the subnet within the virtual network that the VMs will be deployed to."
+            }
+        },                         
         "configScriptUrl" : {
             "type": "string",
             "defaultValue": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/ConfigVM.ps1",
@@ -72,7 +76,8 @@
             "publisher": "MicrosoftWindowsServer",
             "version": "latest",
             "offer": "WindowsServer"
-        }
+        },
+        "subnetId" : "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/virtualNetworks/', parameters('vnetName'), '/subnets/', parameters('subnetName')]"
     },
     "resources": [
         {
@@ -118,7 +123,7 @@
                                             "name": "[concat(parameters('vmssName'), 'IpConfig')]",
                                             "properties": {
                                                 "subnet": {
-                                                    "id": "[parameters('subnetId')]"
+                                                    "id": "[variables('subnetId')]"
                                                 }
                                             }
                                         }
