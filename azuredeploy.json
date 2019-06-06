@@ -77,7 +77,7 @@
             "version": "latest",
             "offer": "WindowsServer"
         },
-        "subnetId" : "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/virtualNetworks/', parameters('vnetName'), '/subnets/', parameters('subnetName'))]"
+        "subnetId" : "[concat( resourceGroup().id, '/providers/Microsoft.Network/virtualNetworks/', parameters('vnetName'), '/subnets/', parameters('subnetName'))]"
     },
     "resources": [
         {
