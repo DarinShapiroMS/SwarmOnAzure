@@ -22,7 +22,8 @@ VM Sku | this is the size of the virtual machines that get created. Reference th
 Admin Username | Windows admin username used to create VM instance.
 Admin Password | Windows admin password.  Store this info for later use.
 Instance Count |  The number of VM instances that the Scale Set will create and maintain for you.
-Subnet Id | TBF
+Vnet Name | The name of the Virtual Network that contains the target subnet for agents to be installed in. 
+Subnet Name | The name of the Virtual Network's subnet where the agents will be installed in. 
 Config Script URL | The URL for [ConfigVm.ps1](ConfigVM.ps1) that will configure each VM instance.
 Coordinator Ip | The IP address of the Swarm Coordinator located on-prem. This IP much be reachable by the Swarm Agents through the VPN. It must also not block the ports needed by Swarm. ****more info needed here.**
 
