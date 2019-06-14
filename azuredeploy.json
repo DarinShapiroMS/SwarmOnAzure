@@ -105,9 +105,10 @@
                             "caching": "ReadWrite"
                         }
                     },
-                    "priority": "Regular",
+                    "priority": "Low",
+                    "evictionPolicy": "delete",
                     "osProfile": {
-                        "computerNamePrefix": "[variables('namingInfix')]",
+                        "computerNamePrefix": "AzureAgent",
                         "adminUsername": "[parameters('adminUsername')]",
                         "adminPassword": "[parameters('adminPassword')]"
                     },
