@@ -17,6 +17,7 @@
             }
         },
         "vmPriorty":{
+            "type": "string",
             "defaultValue": "Normal",
             "allowedValues": ["Normal", "Low"],
             "metadata": {
