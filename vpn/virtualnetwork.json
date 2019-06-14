@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "defaultValue": "swarmautotest",
+            "type": "string"
+        },
+        "vnetCIDR":{
+            "defaultValue": "10.2.0.0/22",
+            "type": "string",
+            "metadata":{
+                "description" : "IP address prefix for the virtual network."
+            }
+        },
+        "swarmSubnetCIDR": {
+            "defaultValue": "10.2.0.0/24",
+            "type": "string",
+            "metadata": {
+                "description":"IP address range CIDR for the subnet that contains the Swarm Agent VMs.  **Must be a subset of VnetCIDR range."
+            }
+        },
+        "gatewaySubnetCIDR":{
+            "defaultValue": "10.2.1.26",
+            "type": "string",
+            "metadata": {
+                "description" : "IP address range CIDR for gateway subnet. This doesn't have to be large and must also be a subset of vnetCIDR."
+            }
+        }
+
+        
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2019-02-01",
+            "name": "[parameters('vnetName')]",
+            "location": "westus2",
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "cd6cea5f-d8cd-433e-b713-1d7abc7a0bd8",
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vnetCIDR')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "[parameters('swarmSubnetCIDR')]",
+                            "delegations": []
+                        }
+                    },
+                    {
+                        "name": "GatewaySubnet",
+                        
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "[parameters('gatewaySubnetCIDR')]",
+                            "serviceEndpoints": [],
+                            "delegations": []
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false,
+                "enableVmProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2019-02-01",
+            "name": "[concat(parameters('vnetName'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+            ],
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "[parameters('swarmSubnetCIDR')]",
+                "delegations": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2019-02-01",
+            "name": "[concat(parameters('vnetName'), '/GatewaySubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+            ],
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "[parameters('gatewaySubnetCIDR')]",
+                "serviceEndpoints": [],
+                "delegations": []
+            }
+        }
+    ]
+}
