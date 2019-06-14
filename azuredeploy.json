@@ -16,6 +16,13 @@
                 "description":"The sku/size of the vm instances to be created.  Determines cores/memory/etc."
             }
         },
+        "vmPriorty":{
+            "defaultValue": "Normal",
+            "allowedValues": ["Normal", "Low"],
+            "metadata": {
+                "description": "Low priority VMs are cheaper but can be deallocated when Azure needs more inventory."
+            }
+        },
         "adminUsername": {
             "type": "string",
             "metadata": {
@@ -105,10 +112,10 @@
                             "caching": "ReadWrite"
                         }
                     },
-                    "priority": "Low",
+                    "priority": "[parameters('vmPriorty')]",
                     "evictionPolicy": "delete",
                     "osProfile": {
-                        "computerNamePrefix": "AzureAgent",
+                        "computerNamePrefix": "AzrAgent",
                         "adminUsername": "[parameters('adminUsername')]",
                         "adminPassword": "[parameters('adminPassword')]"
                     },
