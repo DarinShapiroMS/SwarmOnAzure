@@ -17,9 +17,12 @@
             }
         },
         "vmPriorty":{
-            "type": "string",
+            "type": "string",           
+            "allowedValues": [
+                "Normal",
+                 "Low"
+                ],
             "defaultValue": "Normal",
-            "allowedValues": ["Normal", "Low"],
             "metadata": {
                 "description": "Low priority VMs are cheaper but can be deallocated when Azure needs more inventory."
             }
