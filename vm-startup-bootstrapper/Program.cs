@@ -33,7 +33,7 @@ namespace SwarmAgentBootstrapperNet
             // take the max of both vcpu and logproc
             vCPU_Count = Math.Max(vCPU_Count, logProcCount);
             Console.WriteLine("Number Of Logical Processors: {0}", vCPU_Count);
-            Console.ReadLine();
+           
 
             // ensure we're in the same directory as swarm
             string swarmAgentPath = Environment.CurrentDirectory;
