@@ -22,11 +22,23 @@ namespace SwarmAgentBootstrapperNet
 
             // Get the number of logical processors
             int vCPU_Count = Environment.ProcessorCount;
+            
+
+            int logProcCount = 0;
+            foreach (var item in new System.Management.ManagementObjectSearcher("Select * from Win32_ComputerSystem").Get())
+            {
+                logProcCount+= int.Parse( item["NumberOfLogicalProcessors"].ToString());
+            }
+
+            // take the max of both vcpu and logproc
+            vCPU_Count = Math.Max(vCPU_Count, logProcCount);
             Console.WriteLine("Number Of Logical Processors: {0}", vCPU_Count);
+            Console.ReadLine();
 
             // ensure we're in the same directory as swarm
             string swarmAgentPath = Environment.CurrentDirectory;
             
+
 
             // load dev options
             string devOptionsFilePath = Path.Combine(swarmAgentPath, "SwarmAgent.DeveloperOptions.xml");
@@ -35,7 +47,7 @@ namespace SwarmAgentBootstrapperNet
 
             // update element that contains the default processor count
             XElement x = XElement.Load(devOptionsFilePath);
-            x.Descendants("RemoteJobsDefaultProcessorCount").First().Value = Environment.ProcessorCount.ToString();
+            x.Descendants("RemoteJobsDefaultProcessorCount").First().Value = vCPU_Count.ToString();
             x.Save(devOptionsFilePath);
 
             // start swarm agent
