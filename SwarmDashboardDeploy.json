@@ -1,0 +1,271 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "NetworkGatewayName": {
+            "type": "string"
+        },
+        "ScaleSetName": {
+            "type": "string"
+        },
+        "ResourceGroup": {
+            "type": "string"
+        },
+        "dashboardName": {
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+      {
+        "properties": {
+          "lenses": {
+            "0": {
+              "order": 0,
+              "parts": {
+                "0": {
+                  "position": {
+                    "x": 0,
+                    "y": 0,
+                    "rowSpan": 3,
+                    "colSpan": 5
+                  },
+                  "metadata": {
+                    "inputs": [
+                      {
+                        "name": "sharedTimeRange",
+                        "isOptional": true
+                      },
+                      {
+                        "name": "options",
+                        "value": {
+                          "chart": {
+                            "metrics": [
+                              {
+                                "resourceMetadata": {
+                                  "id":  "[resourceId(parameters('ResourceGroup'), 'Microsoft.Compute/virtualMachineScaleSets', parameters('ScaleSetName'))]"
+                                },
+                                "name": "Percentage CPU",
+                                "aggregationType": 4,
+                                "metricVisualization": {
+                                  "resourceDisplayName": "SwarmAgents",
+                                  "color": "#47BDF5"
+                                }
+                              }
+                            ],
+                            "title": "CPU (average)",
+                            "visualization": {
+                              "chartType": 2
+                            },
+                            "openBladeOnClick": {
+                              "openBlade": true
+                            }
+                          }
+                        },
+                        "isOptional": true
+                      }
+                    ],
+                    "type": "Extension/HubsExtension/PartType/MonitorChartPart",
+                    "settings": {
+                      "content": {
+                        "options": {
+                          "chart": {
+                            "metrics": [
+                              {
+                                "resourceMetadata": {
+                                  "id":  "[resourceId(parameters('ResourceGroup'), 'Microsoft.Compute/virtualMachineScaleSets', parameters('ScaleSetName'))]"
+                                },
+                                "name": "Percentage CPU",
+                                "aggregationType": 4,
+                                "metricVisualization": {
+                                  "resourceDisplayName": "SwarmAgents",
+                                  "color": "#47BDF5"
+                                }
+                              }
+                            ],
+                            "title": "CPU (average)",
+                            "visualization": {
+                              "chartType": 2,
+                              "disablePinning": true
+                            },
+                            "openBladeOnClick": {
+                              "openBlade": true
+                            },
+                            "filterCollection": {
+                              "filters": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "filters": {
+                      "MsPortalFx_TimeRange": {
+                        "model": {
+                          "format": "local",
+                          "granularity": "auto",
+                          "relative": "60m"
+                        }
+                      }
+                    }
+                  }
+                },
+                "1": {
+                  "position": {
+                    "x": 5,
+                    "y": 0,
+                    "rowSpan": 3,
+                    "colSpan": 5
+                  },
+                  "metadata": {
+                    "inputs": [
+                      {
+                        "name": "sharedTimeRange",
+                        "isOptional": true
+                      },
+                      {
+                        "name": "options",
+                        "value": {
+                          "chart": {
+                            "metrics": [
+                              {
+                                "resourceMetadata": {
+                                  "id": "[resourceId(parameters('ResourceGroup'), 'Microsoft.Network/virtualNetworkGateways', parameters('NetworkGatewayName'))]"
+                                },
+                                "name": "P2SBandwidth",
+                                "aggregationType": 4,
+                                "namespace": "microsoft.network/virtualnetworkgateways",
+                                "metricVisualization": {
+                                  "displayName": "Gateway P2S Bandwidth",
+                                  "color": "#47BDF5"
+                                }
+                              }
+                            ],
+                            "title": "Avg Gateway P2S Bandwidth",
+                            "visualization": {
+                              "chartType": 2,
+                              "legendVisualization": {
+                                "isVisible": true,
+                                "position": 2,
+                                "hideSubtitle": false
+                              },
+                              "axisVisualization": {
+                                "x": {
+                                  "isVisible": true,
+                                  "axisType": 2
+                                },
+                                "y": {
+                                  "isVisible": true,
+                                  "axisType": 1
+                                }
+                              }
+                            }
+                          },
+                          "version": 2
+                        },
+                        "isOptional": true
+                      }
+                    ],
+                    "type": "Extension/HubsExtension/PartType/MonitorChartPart",
+                    "settings": {
+                      "content": {
+                        "options": {
+                          "chart": {
+                            "metrics": [
+                              {
+                                "resourceMetadata": {
+                                  "id":"[resourceId(parameters('ResourceGroup'), 'Microsoft.Network/virtualNetworkGateways', parameters('NetworkGatewayName'))]"
+                                },
+                                "name": "P2SBandwidth",
+                                "aggregationType": 4,
+                                "namespace": "microsoft.network/virtualnetworkgateways",
+                                "metricVisualization": {
+                                  "displayName": "Gateway P2S Bandwidth",
+                                  "color": "#47BDF5"
+                                }
+                              }
+                            ],
+                            "title": "Avg Gateway P2S Bandwidth",
+                            "visualization": {
+                              "chartType": 2,
+                              "legendVisualization": {
+                                "isVisible": true,
+                                "position": 2,
+                                "hideSubtitle": false
+                              },
+                              "axisVisualization": {
+                                "x": {
+                                  "isVisible": true,
+                                  "axisType": 2
+                                },
+                                "y": {
+                                  "isVisible": true,
+                                  "axisType": 1
+                                }
+                              },
+                              "disablePinning": true
+                            },
+                            "filterCollection": {
+                              "filters": []
+                            }
+                          },
+                          "version": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "model": {
+              "timeRange": {
+                "value": {
+                  "relative": {
+                    "duration": 24,
+                    "timeUnit": 1
+                  }
+                },
+                "type": "MsPortalFx.Composition.Configuration.ValueTypes.TimeRange"
+              },
+              "filterLocale": {
+                "value": "en-us"
+              },
+              "filters": {
+                "value": {
+                  "MsPortalFx_TimeRange": {
+                    "model": {
+                      "format": "local",
+                      "granularity": "auto",
+                      "relative": "30m"
+                    },
+                    "displayCache": {
+                      "name": "Local Time",
+                      "value": "Past 30 minutes"
+                    },
+                    "filteredPartIds": [
+                      "StartboardPart-MonitorChartPart-1f75ca6b-2894-453b-883e-260c2d73519e",
+                      "StartboardPart-MonitorChartPart-1f75ca6b-2894-453b-883e-260c2d7351ad",
+                      "StartboardPart-MonitorChartPart-1f75ca6b-2894-453b-883e-260c2d7351bc",
+                      "StartboardPart-MonitorChartPart-1f75ca6b-2894-453b-883e-260c2d7351cb",
+                      "StartboardPart-MonitorChartPart-bb7215bb-28e5-4c25-948a-e195076d77ed",
+                      "StartboardPart-MonitorChartPart-67a90fba-6f7e-49ff-a2de-7858cc76945f",
+                      "StartboardPart-MonitorChartPart-67a90fba-6f7e-49ff-a2de-7858cc769467"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "apiVersion": "2015-08-01-preview",
+        "name": "Swarm Agents Deployment Test",
+        "type": "Microsoft.Portal/dashboards",
+        "location": "westus2",
+        "tags": {
+          "hidden-title": "Swarm Agents Deployment Test"
+        }
+      }
+    ]
+  }
+  

@@ -166,6 +166,24 @@
 
                 }
             }
-        }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "linkedTemplate",
+            "properties": {
+              "mode": "Incremental",
+              "templateLink": {
+                "uri": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/master/SwarmDashboardDeploy.json",
+                 "contentVersion":"1.0.0.0"
+              },
+              "parameters": {               
+                 "NetworkGatewayName": {"value" :"SwarmGateway"},
+                 "ScaleSetName": {"value": "[parameters('vmssName')]"},
+                 "ResourceGroup": {"value" : "[resourceGroup().name]"},
+                 "dashboardName": {"value" : "testdashboard"}
+                }                             
+            }
+         }
     ]
 }
