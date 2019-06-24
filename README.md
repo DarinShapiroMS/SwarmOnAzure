@@ -28,7 +28,7 @@ Coordinator Ip | The IP address of the Swarm Coordinator located on-prem. This I
 
 ### **Ready to deploy into your own Azure Subscription?**
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDarinShapiroMS%2FSwarmOnAzure%2Fmaster%2Fazuredeploy.json" target="_new">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDarinShapiroMS%2FSwarmOnAzure%2FDev%2Fazuredeploy.json" target="_new">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
