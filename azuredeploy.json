@@ -185,7 +185,7 @@
                 }                             
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualMachineScaleSets', parameters('vmssName'))]"
+                "[resourceId('Microsoft.Compute/virtualMachineScaleSets', parameters('vmssName'))]"
                
               ]
          }
