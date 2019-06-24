@@ -174,7 +174,7 @@
             "properties": {
               "mode": "Incremental",
               "templateLink": {
-                "uri": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/Dev/SwarmDashboardDeploy.json",
+                "uri": "[uri(deployment().properties.templateLink.uri, 'SwarmDashboardDeploy.json')]",                
                  "contentVersion":"1.0.0.0"
               },
               "parameters": {               
@@ -183,7 +183,11 @@
                  "ResourceGroup": {"value" : "[resourceGroup().name]"},
                  "dashboardName": {"value" : "testdashboard"}
                 }                             
-            }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualMachineScaleSets', parameters('vmssName'))]"
+               
+              ]
          }
     ]
 }
