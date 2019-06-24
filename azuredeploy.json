@@ -174,7 +174,7 @@
             "properties": {
               "mode": "Incremental",
               "templateLink": {
-                "uri": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/dev/SwarmDashboardDeploy.json",
+                "uri": "https://raw.githubusercontent.com/DarinShapiroMS/SwarmOnAzure/Dev/SwarmDashboardDeploy.json",
                  "contentVersion":"1.0.0.0"
               },
               "parameters": {               
