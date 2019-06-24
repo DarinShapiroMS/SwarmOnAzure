@@ -259,11 +259,11 @@
           }
         },
         "apiVersion": "2015-08-01-preview",
-        "name": "Swarm Agents Deployment Test",
+        "name": "SwarmTest",
         "type": "Microsoft.Portal/dashboards",
         "location": "westus2",
         "tags": {
-          "hidden-title": "Swarm Agents Deployment Test"
+          "hidden-title": "SwarmTest"
         }
       }
     ]
