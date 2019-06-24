@@ -18,7 +18,8 @@ There is also the prequisite step of setting up a Virtual Network and [VPN gatew
 Resource Group | The resource group this cluster of Unreal Swarm agents will be deployed into
 Location | The Azure region for this resource group
 Vmss Name | The name of the Virtual Machines Scale Sets that will manage the cluster of VM instances
-VM Sku | this is the size of the virtual machines that get created. Reference the size column for each VM family at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes.
+VM Sku | this is the size of the virtual machines that get created. Reference the size column for each VM family [here](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes).
+VM Priority | Low priority VMs cost much less, but can be premempted by Azure at any time. See [Low Priority VMs](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-use-low-priority)
 Admin Username | Windows admin username used to create VM instance.
 Admin Password | Windows admin password.  Store this info for later use.
 Instance Count |  The number of VM instances that the Scale Set will create and maintain for you.
