@@ -169,7 +169,7 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2018-05-01",
+            "apiVersion": "2019-05-01",
             "name": "linkedTemplate",
             "properties": {
               "mode": "Incremental",
